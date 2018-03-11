@@ -220,7 +220,7 @@ NAN_METHOD(c11) {
 
     uint32_t input_len = Buffer::Length(target);
 
-    c11_hash(input, output, input_len);
+    c11_hash(input, output);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 }
