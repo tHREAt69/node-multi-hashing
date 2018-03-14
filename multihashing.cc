@@ -443,7 +443,7 @@ NAN_METHOD(qubit) {
 
     uint32_t input_len = Buffer::Length(target);
 
-    qubit_hash(input, output, input_len);
+    qubit_hash(input, output);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 }

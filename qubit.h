@@ -5,9 +5,7 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
-
-void qubit_hash(const char* input, char* output, uint32_t len);
+void qubit_hash(const char* input, char* output);
 
 #ifdef __cplusplus
 }
