@@ -661,7 +661,7 @@ NAN_METHOD(yescrypt) {
 
 }
 
-NAN_METHOD(yescrypt) {
+NAN_METHOD(yescryptR16) {
 
     if (info.Length() < 1)
         return THROW_ERROR_EXCEPTION("You must provide one argument.");
@@ -682,7 +682,7 @@ NAN_METHOD(yescrypt) {
 
 }
 
-NAN_METHOD(yescrypt) {
+NAN_METHOD(yescryptR32) {
 
     if (info.Length() < 1)
         return THROW_ERROR_EXCEPTION("You must provide one argument.");
@@ -733,8 +733,8 @@ NAN_MODULE_INIT(init) {
     Nan::Set(target, Nan::New("fresh").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(fresh)).ToLocalChecked());
     Nan::Set(target, Nan::New("neoscrypt").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(neoscrypt)).ToLocalChecked());
     Nan::Set(target, Nan::New("yescrypt").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(yescrypt)).ToLocalChecked());
-    Nan::Set(target, Nan::New("yescryptR16").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(yescrypt)).ToLocalChecked());
-    Nan::Set(target, Nan::New("yescryptR32").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(yescrypt)).ToLocalChecked());
+    Nan::Set(target, Nan::New("yescryptR16").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(yescryptR16)).ToLocalChecked());
+    Nan::Set(target, Nan::New("yescryptR32").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(yescryptR32)).ToLocalChecked());
 }
 
 NODE_MODULE(multihashing, init)
