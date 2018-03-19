@@ -653,7 +653,9 @@ NAN_METHOD(yescrypt) {
     char * input = Buffer::Data(target);
     char *output = (char*) malloc(sizeof(char) * 32);
 
-    yescrypt_hash(input, output);
+    uint32_t input_len = Buffer::Length(target);
+
+    yescrypt_hash(input, output, input_len);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 
@@ -672,7 +674,9 @@ NAN_METHOD(yescryptR16) {
     char * input = Buffer::Data(target);
     char *output = (char*) malloc(sizeof(char) * 32);
 
-    yescryptR16_hash(input, output);
+    uint32_t input_len = Buffer::Length(target);
+
+    yescryptR16_hash(input, output, input_len);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 
@@ -691,7 +695,9 @@ NAN_METHOD(yescryptR32) {
     char * input = Buffer::Data(target);
     char *output = (char*) malloc(sizeof(char) * 32);
 
-    yescryptR32_hash(input, output);
+    uint32_t input_len = Buffer::Length(target);
+
+    yescryptR32_hash(input, output, input_len);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 
