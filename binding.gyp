@@ -66,7 +66,6 @@
                 "crypto/hash.c",
                 "crypto/aesb.c",
                 "crypto/wild_keccak.cpp",
-                "yescrypt/sha256_Y.c",
                 "yescrypt/yescrypt-opt.c",
                 "yescrypt/yescrypt-platform.c",
                 "yescrypt/yescrypt.c"
