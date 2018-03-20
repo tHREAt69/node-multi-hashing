@@ -1,6 +1,6 @@
 node-multi-hashing
 ===============
-Cryptocurrency hashing functions for [Node Stratum Pool](https://github.com/foxer666/node-stratum-pool)
+Cryptocurrency hashing functions for [Node Stratum Pool](https://github.com/1301313Y/node-stratum-pool)
 
 Recent Updates:
 * March 19th, 2018
