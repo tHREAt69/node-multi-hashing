@@ -363,8 +363,7 @@ yescrypt_bsty(const uint8_t * passwd, size_t passwdlen,
 	return retval;
 }
 
-void yescrypt_hash_sp(const char *input, char *output)
-{
+void yescrypt_hash_sp(const char *input, char *output) {
    yescrypt_bsty((const uint8_t *)input, 80, (const uint8_t *) input, 80, 2048, 8, 1, (uint8_t *)output, 32);
 }
 
@@ -373,10 +372,10 @@ void yescrypt_hash(const char *input, char *output, uint32_t len) {
 	yescrypt_bsty((uint8_t*)input, len, (uint8_t*)input, len, 2048, 8, 1, (uint8_t*)output, 32);
 }
 
-void yescrypt_hash_r16(const char *input, char *output, uint32_t len) {
+void yescryptR16_hash(const char *input, char *output, uint32_t len) {
 	yescrypt_bsty((uint8_t*)input, len, (uint8_t*)input, len, 4096, 16, 1, (uint8_t*)output, 32);
 }
 
-void yescrypt_hash_r32(const char *input, char *output, uint32_t len) {
+void yescryptR32_hash(const char *input, char *output, uint32_t len) {
 	yescrypt_bsty((uint8_t*)input, len, (uint8_t*)input, len, 4096, 32, 1, (uint8_t*)output, 32);
 }
