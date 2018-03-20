@@ -28,12 +28,6 @@
  * online backup system.
  */
 
-#ifdef __i386__
-#warning "This implementation does not use SIMD, and thus it runs a lot slower than the SIMD-enabled implementation. Enable at least SSE2 in the C compiler and use yescrypt-best.c instead unless you're building this SIMD-less implementation on purpose (portability to older CPUs or testing)."
-#elif defined(__x86_64__)
-#warning "This implementation does not use SIMD, and thus it runs a lot slower than the SIMD-enabled implementation. Use yescrypt-best.c instead unless you're building this SIMD-less implementation on purpose (for testing only)."
-#endif
-
 #include <errno.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -42,6 +36,26 @@
 #include "sysendian.h"
 
 #include "yescrypt-platform.c"
+
+static inline uint32_t
+le32dec(const void *pp)
+{
+	const uint8_t *p = (uint8_t const *)pp;
+
+	return ((uint32_t)(p[0]) + ((uint32_t)(p[1]) << 8) +
+	    ((uint32_t)(p[2]) << 16) + ((uint32_t)(p[3]) << 24));
+}
+
+static inline void
+le32enc(void *pp, uint32_t x)
+{
+	uint8_t * p = (uint8_t *)pp;
+
+	p[0] = x & 0xff;
+	p[1] = (x >> 8) & 0xff;
+	p[2] = (x >> 16) & 0xff;
+	p[3] = (x >> 24) & 0xff;
+}
 
 static inline void
 blkcpy(uint64_t * dest, const uint64_t * src, size_t count)
@@ -930,9 +944,11 @@ yescrypt_kdf(const yescrypt_shared_t * shared, yescrypt_local_t * local,
 			HMAC_SHA256_Init_Y(&ctx, buf, buflen);
 			if (r == 32)	{ // yescryptR32
 				HMAC_SHA256_Update_Y(&ctx, "WaviBanana", 10);
-			} else if (r == 16)	{ // yescryptR16
+			} else
+			if (r == 16)	{ // yescryptR16
 				HMAC_SHA256_Update_Y(&ctx, "Client Key", 10);
-			} else	{ // yescrypt
+			}
+			else	{ // yescrypt
 				HMAC_SHA256_Update_Y(&ctx, salt, saltlen);
 			}
 			HMAC_SHA256_Final_Y((uint8_t *)sha256, &ctx);

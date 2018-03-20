@@ -69,7 +69,6 @@
                 "yescrypt/sha256_Y.c",
                 "yescrypt/yescrypt-opt.c",
                 "yescrypt/yescrypt-platform.c",
-                "yescrypt/yescrypt-simd.c",
                 "yescrypt/yescrypt.c"
             ],
             "include_dirs": [
