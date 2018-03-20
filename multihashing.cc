@@ -676,7 +676,7 @@ NAN_METHOD(yescryptR16) {
 
     uint32_t input_len = Buffer::Length(target);
 
-    yescryptR16_hash(input, output, input_len);
+    yescrypt_hash_r16(input, output, input_len);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 
@@ -697,7 +697,7 @@ NAN_METHOD(yescryptR32) {
 
     uint32_t input_len = Buffer::Length(target);
 
-    yescryptR32_hash(input, output, input_len);
+    yescrypt_hash_r32(input, output, input_len);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 
