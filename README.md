@@ -4,7 +4,7 @@ Cryptocurrency hashing functions for [Node Stratum Pool](https://github.com/foxe
 
 Recent Updates:
 * March 19th, 2018
-  * Enabled the Yescrypt, YescryptR16 and YescryptR32 algorithma. Currently testing R32 using Wavi, shares work.
+  * Enabled the Yescrypt, YescryptR16 and YescryptR32 algorithms. Currently testing R32 using Wavi, shares work.
   * C11 is now confirmed working with shares/payout using Dixicoin.
 * March 10th, 2018
   * Enabled the c11 algorithm. Currently testing using the Dixicoin testnet.
