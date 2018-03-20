@@ -27,20 +27,22 @@
  * This file was originally written by Colin Percival as part of the Tarsnap
  * online backup system.
  */
+#ifndef _YESCRYPT_H_
+#define _YESCRYPT_H_
 
-#ifndef YESCRYPT_H
-#define YESCRYPT_H
+#include <stdint.h>
+#include <stdlib.h> /* for size_t */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <stdint.h>
-#include <stdlib.h> /* for size_t */
 
 void yescrypt_hash(const char* input, char* output, uint32_t len);
 void yescryptR16_hash(const char* input, char* output, uint32_t len);
 void yescryptR32_hash(const char* input, char* output, uint32_t len);
+
+
 
 /**
  * crypto_scrypt(passwd, passwdlen, salt, saltlen, N, r, p, buf, buflen):
@@ -64,8 +66,8 @@ extern int crypto_scrypt(const uint8_t * __passwd, size_t __passwdlen,
  * they might differ from each other in a future version.
  */
 typedef struct {
-	void * base, * aligned;
-	size_t base_size, aligned_size;
+    void * base, * aligned;
+    size_t base_size, aligned_size;
 } yescrypt_region_t;
 
 /**
@@ -73,8 +75,8 @@ typedef struct {
  */
 typedef yescrypt_region_t yescrypt_shared1_t;
 typedef struct {
-	yescrypt_shared1_t shared1;
-	uint32_t mask1;
+    yescrypt_shared1_t shared1;
+    uint32_t mask1;
 } yescrypt_shared_t;
 typedef yescrypt_region_t yescrypt_local_t;
 
@@ -82,8 +84,8 @@ typedef yescrypt_region_t yescrypt_local_t;
  * Possible values for yescrypt_init_shared()'s flags argument.
  */
 typedef enum {
-	YESCRYPT_SHARED_DEFAULTS = 0,
-	YESCRYPT_SHARED_PREALLOCATED = 0x100
+    YESCRYPT_SHARED_DEFAULTS = 0,
+    YESCRYPT_SHARED_PREALLOCATED = 0x100
 } yescrypt_init_shared_flags_t;
 
 /**
@@ -95,19 +97,19 @@ typedef enum {
  */
 typedef enum {
 /* public */
-	YESCRYPT_WORM = 0,
-	YESCRYPT_RW = 1,
-	YESCRYPT_PARALLEL_SMIX = 2,
-	YESCRYPT_PWXFORM = 4,
+    YESCRYPT_WORM = 0,
+    YESCRYPT_RW = 1,
+    YESCRYPT_PARALLEL_SMIX = 2,
+    YESCRYPT_PWXFORM = 4,
 /* private */
-	__YESCRYPT_INIT_SHARED_1 = 0x10000,
-	__YESCRYPT_INIT_SHARED_2 = 0x20000,
-	__YESCRYPT_INIT_SHARED = 0x30000
+    __YESCRYPT_INIT_SHARED_1 = 0x10000,
+    __YESCRYPT_INIT_SHARED_2 = 0x20000,
+    __YESCRYPT_INIT_SHARED = 0x30000
 } yescrypt_flags_t;
 
 #define YESCRYPT_KNOWN_FLAGS \
-	(YESCRYPT_RW | YESCRYPT_PARALLEL_SMIX | YESCRYPT_PWXFORM | \
-	__YESCRYPT_INIT_SHARED)
+    (YESCRYPT_RW | YESCRYPT_PARALLEL_SMIX | YESCRYPT_PWXFORM | \
+    __YESCRYPT_INIT_SHARED)
 
 /**
  * yescrypt_init_shared(shared, param, paramlen, N, r, p, flags, mask,
@@ -135,17 +137,17 @@ typedef enum {
  * used e.g. when the ROM is memory-mapped from a disk file.  Recommended mask
  * values are powers of 2 minus 1 or minus 2.  Here's the effect of some mask
  * values:
- * mask	value	ROM accesses in SMix 1st loop	ROM accesses in SMix 2nd loop
- *	0		0				1/2
- *	1		1/2				1/2
- *	2		0				1/4
- *	3		1/4				1/4
- *	6		0				1/8
- *	7		1/8				1/8
- *	14		0				1/16
- *	15		1/16				1/16
- *	1022		0				1/1024
- *	1023		1/1024				1/1024
+ * mask value   ROM accesses in SMix 1st loop   ROM accesses in SMix 2nd loop
+ *  0       0               1/2
+ *  1       1/2             1/2
+ *  2       0               1/4
+ *  3       1/4             1/4
+ *  6       0               1/8
+ *  7       1/8             1/8
+ *  14      0               1/16
+ *  15      1/16                1/16
+ *  1022        0               1/1024
+ *  1023        1/1024              1/1024
  *
  * Actual computation of the ROM contents may be avoided, if you don't intend
  * to use a ROM but need a dummy shared structure, by calling this function
@@ -371,4 +373,4 @@ extern uint8_t * yescrypt_gensalt(
 }
 #endif
 
-#endif
+#endif /* !_YESCRYPT_H_ */
