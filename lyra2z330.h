@@ -7,7 +7,7 @@ extern "C" {
 
 #endif
 
-void lyra2z330_hash(const char* input, char* output, uint32_t len);
+void lyra2z330_hash(const char* input, char* output);
 
 #ifdef __cplusplus
 
