@@ -27,19 +27,22 @@
  * online backup system.
  */
 
-#include <memory.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <string.h>
-#include <stdio.h>
-#include "lyra2z330.h"
-#include "lyra2.h"
+ #include "lyra2z.h"
+ #include <stdlib.h>
+ #include <stdint.h>
+ #include <string.h>
+ #include <stdio.h>
+ #include "./sha3/sph_blake.h"
+ #include "lyra2.h"
+ 
+ void lyra2z330_hash(const char* input, char* output, uint32_t height)
+ {
+	 uint32_t hash[16];
+	 
+	 uint64_t* lyra2z330_wholeMatrix;
 
-void lyra2z330_hash(const char* input, char* output, uint32_t len)
-{
-	        uint32_t hashY[8];
-
-                LYRA2(hashY, 32, input, 80, input, 80, 2, 330, 256);
-
-	        memcpy(output, hashY, 32);
-}
+		 LYRA2Z( lyra2z330_wholeMatrix, hash, 32, input, 80, input, 80,
+				  2, 330, 256 );
+ 
+	 memcpy(output, hash, 32);
+ }
