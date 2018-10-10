@@ -108,7 +108,9 @@ NAN_METHOD(lyra2z330) {
     char * input = Buffer::Data(target);
     char output[32];
 
-    lyra2z330_hash(input, output);
+    uint32_t input_len = Buffer::Length(target);
+
+    lyra2z330_hash(input, output, input_len);
 
     info.GetReturnValue().Set(Nan::NewBuffer(output, 32).ToLocalChecked());
 }
