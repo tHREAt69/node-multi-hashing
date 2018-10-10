@@ -16,7 +16,7 @@
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODSPushVersion
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
@@ -27,18 +27,19 @@
  * online backup system.
  */
 
-#include "lyra2z330.h"
+#include <memory.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
-#include "lyra2.h"
+#include "lyra2z330.h"
+#include "Lyra2.h"
 
-void lyra2z330_hash(const char* input, char* output)
+void lyra2z330_hash(const char* input, char* output, uint32_t len)
 {
-    uint32_t hashB[8];
+	        uint32_t hashY[8];
 
-    LYRA2(hashB, 32, input, 80, input, 80, 2, 330, 256);
-	
-	memcpy(output, hashB, 32);
+                LYRA2(hashY, 32, input, 80, input, 80, 2, 330, 256);
+
+	        memcpy(output, hashY, 32);
 }
