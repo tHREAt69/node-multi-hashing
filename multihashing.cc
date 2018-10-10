@@ -96,9 +96,9 @@ NAN_METHOD(lyra2z) {
 }
 
 NAN_METHOD(lyra2z330) {
-    
-    if (info.Length() < 1)
-        return THROW_ERROR_EXCEPTION("You must provide one argument.");
+
+    if (info.Length() < 2)
+        return THROW_ERROR_EXCEPTION("You must provide two arguments.");
 
     Local<Object> target = Nan::To<Object>(info[0]).ToLocalChecked();
 
@@ -106,7 +106,7 @@ NAN_METHOD(lyra2z330) {
         return THROW_ERROR_EXCEPTION("Argument should be a buffer object.");
 
     char * input = Buffer::Data(target);
-    char output[32];
+    char *output = (char*) malloc(sizeof(char) * 32);
 
     uint32_t input_len = Buffer::Length(target);
 
